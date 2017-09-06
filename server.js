@@ -1,8 +1,23 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const jwTokens = require('jsonwebtoken');
+const mkdirp = require('mkdirp');
 
+mkdirp('./public/images/posts', function (error) {
+    if (error) {
+        console.error(error)
+    } else {
+        console.log('Posts directory created');
+    }
+});
+
+mkdirp('./public/images/profile', function (error) {
+    if (error) {
+        console.error(error)
+    } else {
+        console.log('Profile directory created');
+    }
+});
 // ES6 promises
 mongoose.Promise = global.Promise;
 
