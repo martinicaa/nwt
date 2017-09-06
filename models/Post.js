@@ -14,7 +14,6 @@ const postSchema = new Schema({
     likes: [{
         type: ObjectId,
         ref: 'User',
-        unique: true
     }],
     tags: [{ type: String }],
     image: { type: String }

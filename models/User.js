@@ -10,9 +10,9 @@ const userSchema = new Schema({
         email: { type: String, required: true, trim: true },
         phone: String,
         gender: String,
-        followers: [{ type: ObjectId, ref: 'User', unique: true }],
-        posts: [{ type: ObjectId, ref: 'Post', unique: true }],
-        following: [{ type: ObjectId, ref: 'User', unique: true }],
+        followers: [{ type: ObjectId, ref: 'User' }],
+        posts: [{ type: ObjectId, ref: 'Post' }],
+        following: [{ type: ObjectId, ref: 'User' }],
         profilePicture: { type: String, required: false, trim: true }
 });
 
