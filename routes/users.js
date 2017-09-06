@@ -31,7 +31,7 @@ const routes = function (User) {
                 } else if(users.length === 0) {
                     res.status(404).send({ success: false, message: 'No users found.' });
                 } else {
-                    res.json(users);
+                    res.json({ success: true, data: users});
                 }
             })
         })
@@ -41,7 +41,7 @@ const routes = function (User) {
                 if (error) {
                     res.status(500).send({ success: false, message: error });
                 } else {
-                    res.json(user);
+                    res.json({success: true, data: user});
                 }
             });
         });
@@ -79,19 +79,19 @@ const routes = function (User) {
                 if (error) {
                     res.status(500).json({ success: false, message: error });
                 } else {
-                    res.json(req.user);
+                    res.json({success: true, data: req.user});
                 }
             })
         });
 
     router.route('/:userId/followers')
         .get(function(req, res){
-            res.json(req.user.followers);
+            res.json({success: true, data: req.user.followers});
         });
 
     router.route('/:userId/following')
         .get(function(req, res){
-            res.json(req.user.following);
+            res.json({success: true, data: req.user.following});
         });
 
     router.route('/:userId/follow')

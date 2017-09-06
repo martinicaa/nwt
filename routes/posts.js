@@ -32,7 +32,7 @@ const routes = function(Post, Comment, User) {
                 } else if(posts.length === 0) {
                     res.status(404).send({ success: false, message: 'No posts found.' });
                 } else {
-                    res.json(posts);
+                    res.json({success: true, data: posts});
                 }
             })
         })
@@ -42,7 +42,7 @@ const routes = function(Post, Comment, User) {
                 if (error) {
                     res.status(500).send({ success: false, message: error });
                 } else {
-                    res.json(post);
+                    res.json({success: true, data: post});
                 }
             });
         });
@@ -59,14 +59,14 @@ const routes = function(Post, Comment, User) {
                     req.post = post;
                     next();
                 } else {
-                    res.status(404).json({ success: true, message: 'No post found' });
+                    res.status(404).json({ success: false, message: 'No post found' });
                 }
             })
     });
 
     router.route('/:postId')
         .get(function(req, res){
-            res.json(req.post);
+            res.json({success: true, data: req.post});
         })
         .post(function(req, res){
             req.post.title = (req.body.title) ? req.body.title : req.post.title;
@@ -76,14 +76,14 @@ const routes = function(Post, Comment, User) {
                 if (error) {
                     res.status(500).json({ success: false, message: error });
                 } else {
-                    res.json(req.post);
+                    res.json({success: true, data: req.post});
                 }
             })
         });
 
     router.route('/:postId/like')
         .get(function(req, res){
-            res.json(req.post.likes);
+            res.json({success: true, data: req.post.likes});
         })
         .post(function(req, res){
             User.findById(req.body.userId, function(error, user){
@@ -96,7 +96,7 @@ const routes = function(Post, Comment, User) {
                         if (error) {
                             res.status(500).json({ success: false, message: error });
                         } else {
-                            res.json(req.post);
+                            res.json({success: true, data: req.post});
                         }
                     });
                 } else {
@@ -107,7 +107,7 @@ const routes = function(Post, Comment, User) {
 
     router.route('/:postId/comments')
         .get(function(req, res){
-            res.json(req.post.comments);
+            res.json({success: true, data:req.post.comments});
         })
         .post(function(req, res){
             const comment = new Comment(req.body);
@@ -121,7 +121,7 @@ const routes = function(Post, Comment, User) {
                             comment.remove();
                             res.status(500).json({ success: false, message: error });
                         } else {
-                            res.json(req.post);
+                            res.json({success: true, data: req.post});
                         }
                     });
                 }
@@ -130,7 +130,7 @@ const routes = function(Post, Comment, User) {
 
     router.route('/:postId/comments/:commentId')
         .get(function(req, res){
-            res.json(req.post.comments);
+            res.json({success: true, data: req.post.comments});
         })
         .post(function(req, res){
             Comment.findById(req.params.commentId, function(error, comment){
@@ -142,7 +142,7 @@ const routes = function(Post, Comment, User) {
                         if (error) {
                             res.status(500).json({ success: false, message: error });
                         } else {
-                            res.json(comment);
+                            res.json({success: true, data: comment});
                         }
                     });
                 }
