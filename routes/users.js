@@ -16,7 +16,9 @@ const routes = function (User) {
     const router = express.Router();
 
     router.post('/', upload.single('profilePicture'), function(req, res, next){
-        req.body.profilePicture = req.file.path();
+        if (req.file){
+            req.body.profilePicture = req.file.path();
+        }
         next();
     });
 

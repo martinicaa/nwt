@@ -16,7 +16,9 @@ const routes = function(Post, Comment, User) {
     const router = express.Router();
 
     router.post('/', upload.single('postImage'), function(req, res, next){
-        req.body.image = req.file.path;
+        if (req.file){
+            req.body.image = req.file.path;
+        }
         next();
     });
 
