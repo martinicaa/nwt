@@ -50,6 +50,29 @@ const User = require('./models/User');
 const Post = require('./models/Post');
 const Comment = require('./models/Comment');
 
+User.findOne({ username: 'admin' }, function(error, user){
+    if (error) {
+        console.error('Default user not created');
+    } else if(user) {
+        console.log('Default user already in DB');
+    } else {
+        const adminUser = new User({
+            username: 'admin',
+            password: 'admin',
+            isAdmin: true,
+            firstName: 'Filip',
+            lastName: 'Juric',
+            email: 'filip.juric01@gmail.com',
+            phone: '892758972589',
+            gender: 'Male'
+        }).save(function(error){
+            if (error) {
+                console.error('Default user not created');
+            }
+        });
+    }
+});
+
 // routers
 const apiRoutes = require('./routes/api')(User);
 app.use('/', apiRoutes);
