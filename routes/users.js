@@ -17,7 +17,7 @@ const routes = function (User) {
 
     router.post('/', upload.single('profilePicture'), function(req, res, next){
         if (req.file){
-            req.body.profilePicture = req.file.path();
+            req.body.profilePicture = req.file.path;
         }
         next();
     });
@@ -63,6 +63,13 @@ const routes = function (User) {
                     res.status(404).json({ success: false, message: 'No user found' });
                 }
             });
+    });
+
+    router.post('/:userId', upload.single('profilePicture'), function(req, res, next){
+        if (req.file){
+            req.body.profilePicture = req.file.path;
+        }
+        next();
     });
 
     router.route('/:userId')

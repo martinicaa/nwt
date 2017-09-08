@@ -13,7 +13,7 @@ const postSchema = new Schema({
     }],
     likes: [{
         type: ObjectId,
-        ref: 'User',
+        ref: 'User'
     }],
     tags: [{ type: String }],
     image: { type: String }

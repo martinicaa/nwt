@@ -112,6 +112,7 @@ const routes = function(Post, Comment, User) {
             res.json({success: true, data:req.post.comments});
         })
         .post(function(req, res){
+            req.body.post = req.post._id;
             const comment = new Comment(req.body);
             comment.save(function(error){
                 if (error) {
